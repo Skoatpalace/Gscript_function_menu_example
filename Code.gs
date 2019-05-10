@@ -13,7 +13,7 @@ function onOpen() {
   .addItem('Insert Date', 'myFun7')
   .addItem('Doc ID', 'myFun8')
   .addItem('Selected Bold', 'myFun9')
-  .addItem('Ten', 'myFun10')
+  .addItem('Selected Translate to French', 'myFun10')
   .addToUi();
 }
 
@@ -69,26 +69,39 @@ function myFun8() {
   ui.alert('Doc ID : ' + doc); 
 }
 
-function myFun9() {
+function myFun9(){
   var selection = DocumentApp.getActiveDocument().getSelection();
   var output;
-  if (selection){
-    var el = selection.getRangeElements(); 
-    for(var x=0; x < el.length; x++){
+  if(selection){
+    var el = selection.getRangeElements();
+    for(var x=0;x<el.length;x++){
       if(el[x].getElement().editAsText){
         var holder = el[x].getElement().editAsText();
         output += holder.getText();
         if(el[x].isPartial()){
-          holder.setBold(el[x].getStartOffset(), el[x].getEndOffsetInclusive(),true);
+          holder.setBold(el[x].getStartOffset(),el[x].getEndOffsetInclusive(),true);
         }else{
           holder.setBold(true);
         }
       }
     }
+    DocumentApp.getUi().alert('Selected Text '+output);
   }
-  DocumentApp.getUi().alert('Selected text : ' + output);
 }
 
-function myFun10() {
-  var doc = DocumentApp.getActiveDocument();
+function myFun10(){
+  var selection = DocumentApp.getActiveDocument().getSelection();
+  var output = 'TRANSLATION:';
+  if(selection){
+    var el = selection.getRangeElements();
+    for(var x=0;x<el.length;x++){
+      if(el[x].getElement().editAsText){
+        var holder = el[x].getElement().editAsText();
+        output += holder.getText();
+      }
+    }
+    
+    var french = LanguageApp.translate(output, 'en', 'fr');
+    DocumentApp.getUi().alert('French : '+french);
+  }
 }
