@@ -13,6 +13,10 @@ function onOpen() {
   .addItem('Insert Date', 'myFun7')
   .addItem('Doc ID', 'myFun8')
   .addItem('Selected Bold', 'myFun9')
-  .addItem('Selected Translate to French', 'myFun10')
+  .addSeparator()
+  .addSubMenu(DocumentApp.getUi().createMenu('Selected Translate')
+     .addItem('To French', 'translateFR')
+     .addItem('To Spanish', 'translateES')
+     .addItem('To German', 'translateDE'))
   .addToUi();
 }

@@ -70,7 +70,7 @@ function myFun9(){
   }
 }
 
-function myFun10(){
+function translateFR(){
   var selection = DocumentApp.getActiveDocument().getSelection();
   var output = 'TRANSLATION:';
   if(selection){
@@ -81,9 +81,40 @@ function myFun10(){
         output += holder.getText();
       }
     }
-    
-    var french = LanguageApp.translate(output, 'en', 'fr');
-    DocumentApp.getUi().alert('French : '+french);
+    var french = LanguageApp.translate(output, '', 'fr');
+    DocumentApp.getUi().alert('French : '+ french);
+  }
+}
+
+function translateES(){
+  var selection = DocumentApp.getActiveDocument().getSelection();
+  var output = 'TRANSLATION:';
+  if(selection){
+    var el = selection.getRangeElements();
+    for(var x=0;x<el.length;x++){
+      if(el[x].getElement().editAsText){
+        var holder = el[x].getElement().editAsText();
+        output += holder.getText();
+      }
+    }
+    var spanish = LanguageApp.translate(output, '', 'es');
+    DocumentApp.getUi().alert('Spanish : '+ spanish);
+  }
+}
+
+function translateDE(){
+  var selection = DocumentApp.getActiveDocument().getSelection();
+  var output = 'TRANSLATION:';
+  if(selection){
+    var el = selection.getRangeElements();
+    for(var x=0;x<el.length;x++){
+      if(el[x].getElement().editAsText){
+        var holder = el[x].getElement().editAsText();
+        output += holder.getText();
+      }
+    }
+    var german = LanguageApp.translate(output, '', 'de');
+    DocumentApp.getUi().alert('German : '+ german);
   }
 }
 
